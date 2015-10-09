@@ -5,7 +5,7 @@ import grails.transaction.Transactional
 @Transactional
 class MessageService {
 
-    static rabbitSubscribe = 'clicks'
+    static rabbitQueue = 'clicks'
 
     void handleMessage(message){
         List<String> mlist = Arrays.asList(message.split(","))

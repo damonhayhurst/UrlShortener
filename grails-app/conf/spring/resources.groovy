@@ -1,4 +1,4 @@
 // Place your Spring DSL code here
 beans = {
-    click(org.springframework.amqp.core.Queue, "clicks")
+    clicks(org.springframework.amqp.core.Queue, "clicks")
 }

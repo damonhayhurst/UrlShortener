@@ -124,4 +124,8 @@ rabbitmq {
         password = 'guest'
         hostname = 'localhost'
     }
+
+    queues = {
+        clicks()
+    }
 }
