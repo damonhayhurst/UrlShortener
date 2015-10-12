@@ -6,6 +6,8 @@ class Url {
 
     static transients = ['clicks', 'clicksCount']
 
+    static mapping = {sort dateCreated: 'desc'}
+
     String url
     String shortUrlName //Short url addresses are http://localhost:8080/$shortUrlName
     Date dateCreated
@@ -33,5 +35,8 @@ class Url {
         Click.countByUrl(this)
     }
 
-
+    @Override
+    String toString() {
+        return shortUrlName
+    }
 }

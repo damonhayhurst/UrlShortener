@@ -9,4 +9,6 @@ import spock.lang.Specification
 @TestFor(RandomService)
 class RandomServiceSpec extends Specification {
 
+
+
 }

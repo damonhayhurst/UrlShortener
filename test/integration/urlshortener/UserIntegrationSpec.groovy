@@ -4,7 +4,9 @@ package urlshortener
  */
 
 import spock.lang.*
-class UserIntegrationSpec {
+class UserIntegrationSpec extends Specification {
+
+    def randomService
 
     def "Save a user to the database"() {
 
@@ -20,5 +22,7 @@ class UserIntegrationSpec {
         User.get(user.id).username == user.username
 
     }
+
+
 
 }
