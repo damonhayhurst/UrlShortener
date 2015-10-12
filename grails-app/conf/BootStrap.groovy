@@ -22,9 +22,20 @@ class BootStrap {
 
     private createSampleData() {
         def r = new Random()
+        def benc = new User(username: 'benc', password: 'password')
+        def damon = new User(username: 'damon', password: '1234')
         [
-            new Url(url: 'https://www.facebook.com/',               shortUrlName: randomService.createShort()),
-            new Url(url: 'https://grails.org/plugins/tag/mongodb',  shortUrlName: randomService.createShort())
+         damon, benc
+        ].each{user ->
+            user.save()
+            if(user.hasErrors()){
+                log.error "user errors " + user.errors
+                return
+            }
+        }
+        [
+            new Url(url: 'https://www.facebook.com/', shortUrlName: randomService.createShort(), user:damon),
+            new Url(url: 'https://grails.org/plugins/tag/mongodb',  shortUrlName: randomService.createShort(), user:damon)
         ].each{ url->
             url.save()
             if(url.hasErrors()){

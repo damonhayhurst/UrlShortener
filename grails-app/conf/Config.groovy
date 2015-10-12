@@ -129,3 +129,28 @@ rabbitmq {
         clicks()
     }
 }
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'urlshortener.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'urlshortener.UserRole'
+grails.plugin.springsecurity.authority.className = 'urlshortener.Role'
+grails.plugin.springsecurity.authority.loginFormUrl = '/login'
+grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login'
+grails.plugin.springsecurity.successHandler.defaultTargetUrl =   '/url/index'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                ['permitAll'],
+    '/**':              ['permitAll'],
+	'/index':           ['permitAll'],
+	'/index.gsp':       ['permitAll'],
+	'/assets/**':       ['permitAll'],
+	'/**/js/**':        ['permitAll'],
+	'/**/css/**':       ['permitAll'],
+	'/**/images/**':    ['permitAll'],
+	'/**/favicon.ico':  ['permitAll'],
+    '/url/**':          ['isFullyAuthenticated()'],
+    '/login/**':         ['permitAll'],
+    '/logout/**':        ['permitAll']
+]
+
+

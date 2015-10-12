@@ -13,6 +13,7 @@ class UrlController {
     static scaffold = Url
 
     def randomService
+    def springSecurityService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -31,6 +32,7 @@ class UrlController {
 
     @Transactional
     def save(Url urlInstance) {
+        def user = spingSecurityService.currentUser
         if (urlInstance == null) {
             notFound()
             return
@@ -43,6 +45,7 @@ class UrlController {
         if (!urlInstance.shortUrlName){
             urlInstance.shortUrlName = randomService.createShort()
         }
+        urlInstance.user = user
         urlInstance.save flush:true
 
         request.withFormat {

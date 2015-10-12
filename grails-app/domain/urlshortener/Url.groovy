@@ -11,6 +11,9 @@ class Url {
     Date dateCreated
 
 //    static hasMany = [clicks: Click]
+
+    static hasOne = [user : User]
+    static belongsTo = [User]
     
     static constraints = {
         url blank: false, url: true
