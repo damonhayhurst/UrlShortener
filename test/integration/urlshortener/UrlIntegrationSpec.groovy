@@ -8,6 +8,7 @@ import spock.lang.*
 class UrlIntegrationSpec extends Specification{
 
     def randomService
+    def dumbster
 
     def "Adding an url links url to user"(){
 
@@ -37,12 +38,15 @@ class UrlIntegrationSpec extends Specification{
         when: "The user is retrieved by their id"
         def foundUser = User.findById(user.id)
         def sortedUrls = foundUser.getUrls()
-        def shortenedUrls = sortedUrls.collect{
+        def shortenedUrls = sortedUrls.collect {
             it.shortUrlName
         }
+        shortenedUrls = shortenedUrls.sort({
+            Url.findByShortUrlName(it).dateCreated
+        })
 
         then: "The urls are returned"
-        shortenedUrls == [random, 'fb123']
+        shortenedUrls == ['fb123', random]
 
     }
 //TODO fix
@@ -53,11 +57,34 @@ class UrlIntegrationSpec extends Specification{
         user.save()
 
         when: "A new url is created without a specified short url"
-        def url = new Url(url: 'https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow', shortUrlName: null)
+        def url = new Url(url: 'https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow', shortUrlName: null, user: user)
+        def urlController = new UrlController()
+        urlController.save(url)
 
 
         then: "The short url will be a random string"
         Url.findByUrl('https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow').shortUrlName.count() == randomService.randomChars
+    }
+
+    def "Email is sent, once url is created"(){
+
+        given: "A new user"
+        def user = new User(username: 'user', password: 'password', email: 'email@mail.com')
+        user.save()
+
+        and: "An empty inbox"
+        dumbster.reset()
+
+        when: "A new url is created"
+        def url = new Url(url: 'https://www.youtube.com/watch?v=C5eV7Nqsal0', shortUrlName: randomService.createShort(), user: user)
+        def urlController = new UrlController()
+        urlController.newUrlEmail(url)
+
+        then: "An email appears in the inbox"
+        dumbster.messageCount == 1
+
+
+
     }
 
 }

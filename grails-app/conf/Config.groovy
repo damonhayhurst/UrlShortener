@@ -93,6 +93,9 @@ environments {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
+    test {
+        dumbster.enabled = true
+    }
 }
 
 // log4j configuration
@@ -153,20 +156,20 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/logout/**':        ['permitAll']
 ]
 
-grails.mail.host="mail.yourserver.com"
+grails.mail.host="127.0.0.1"
 grails.mail.default.from= "earl@shortener.com"
 
-grails {
-    mail {
-        host = "smtp.gmail.com"
-        port = 465
-        username = "your_username@gmail.com"
-        password = "your_password"
-        props = ["mail.smtp.auth"                  : "true",
-                 "mail.smtp.socketFactory.port"    : "465",
-                 "mail.smtp.socketFactory.class"   :
-                         "javax.net.ssl.SSLSocketFactory",
-                 "mail.smtp.socketFactory.fallback": "false"]
-    }
-}
+//grails {
+//    mail {
+//        host = "smtp.gmail.com"
+//        port = 465
+//        username = "your_username@gmail.com"
+//        password = "your_password"
+//        props = ["mail.smtp.auth"                  : "true",
+//                 "mail.smtp.socketFactory.port"    : "465",
+//                 "mail.smtp.socketFactory.class"   :
+//                         "javax.net.ssl.SSLSocketFactory",
+//                 "mail.smtp.socketFactory.fallback": "false"]
+//    }
+//}
 

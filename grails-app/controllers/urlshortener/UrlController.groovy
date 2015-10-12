@@ -30,10 +30,10 @@ class UrlController {
     }
 
 
-    private void newUrlEmail(Url url){
-        if(params.email){
+    def newUrlEmail(Url url){
+        if(url.user.email){
             mailService.sendMail {
-                to params.emails
+                to url.user.email
                 subject "Url Shortened [${url.shortUrlName}]"
                 text """
                 Here is your new shortened url for ${url.url}
@@ -43,7 +43,6 @@ class UrlController {
                 ***********
                 """
             }
-            flash.message = "New Url"
         }
         redirect(uri: "/")
     }

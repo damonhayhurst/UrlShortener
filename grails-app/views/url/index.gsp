@@ -27,6 +27,8 @@
 						<g:sortableColumn property="url" title="${message(code: 'url.url.label', default: 'Url')}" />
 					
 						<g:sortableColumn property="shortUrlName" title="${message(code: 'url.shortUrlName.label', default: 'Short Url Name')}" />
+
+						<g:sortableColumn property="" title="${message(code: 'url.dateCreated.label', default: 'Date Created')}" />
 					
 						<g:sortableColumn property="dateCreated" title="${message(code: 'url.dateCreated.label', default: 'Date Created')}" />
 					
