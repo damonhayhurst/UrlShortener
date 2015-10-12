@@ -12,7 +12,7 @@ class UrlIntegrationSpec extends Specification{
     def "Adding an url links url to user"(){
 
         given: "A user is registered"
-        def user = new User(username: 'user', password: 'password')
+        def user = new User(username: 'user', password: 'password', email: 'email@mail.com')
         user.save(failOnError: true)
 
         when: "Several urls are added"
@@ -26,7 +26,7 @@ class UrlIntegrationSpec extends Specification{
     def  "Ensure urls linked to user can be retrieved by their short name"(){
 
         given: "A user is registered"
-        def user = new User(username: 'user', password: 'password')
+        def user = new User(username: 'user', password: 'password', email: 'email@mail.com')
 
         and: "Several urls are added"
         def random = randomService.createShort()
@@ -49,7 +49,7 @@ class UrlIntegrationSpec extends Specification{
     def "When a short url is not specified a random url is produced"(){
 
         given: "A new user"
-        def user = new User(username: 'user', password: 'password')
+        def user = new User(username: 'user', password: 'password', email: 'email@mail.com')
         user.save()
 
         when: "A new url is created without a specified short url"

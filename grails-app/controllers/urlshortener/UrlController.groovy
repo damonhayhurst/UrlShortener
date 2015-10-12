@@ -14,6 +14,7 @@ class UrlController {
 
     def randomService
     def springSecurityService
+    def mailService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -28,6 +29,24 @@ class UrlController {
         respond new Url(params)
     }
 
+
+    private void newUrlEmail(Url url){
+        if(params.email){
+            mailService.sendMail {
+                to params.emails
+                subject "Url Shortened [${url.shortUrlName}]"
+                text """
+                Here is your new shortened url for ${url.url}
+
+                ***********
+                ${url.shortUrlName}
+                ***********
+                """
+            }
+            flash.message = "New Url"
+        }
+        redirect(uri: "/")
+    }
 
 
     @Transactional
@@ -47,6 +66,8 @@ class UrlController {
         }
         urlInstance.user = user
         urlInstance.save flush:true
+
+        newUrlEmail(urlInstance)
 
         request.withFormat {
             form multipartForm {

@@ -11,7 +11,7 @@ class UserIntegrationSpec extends Specification {
     def "Save a user to the database"() {
 
         given: "A brand new user"
-        def user = new User(username: 'user', password: 'password')
+        def user = new User(username: 'user', password: 'password', email:'email@mail.com')
 
         when: "The user is saved"
         user.save()

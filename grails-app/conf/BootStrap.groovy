@@ -22,8 +22,8 @@ class BootStrap {
 
     private createSampleData() {
         def r = new Random()
-        def benc = new User(username: 'benc', password: 'password')
-        def damon = new User(username: 'damon', password: '1234')
+        def benc = new User(username: 'benc', password: 'password', email: "email@mail.com")
+        def damon = new User(username: 'damon', password: '1234', email: "email2@mail.com")
         [
          damon, benc
         ].each{user ->
