@@ -22,7 +22,6 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 
-			<large>count my clicks: ${urlInstance.clicksCount}</large>
 
 			<ol class="property-list url">
 			
@@ -30,7 +29,7 @@
 				<li class="fieldcontain">
 					<span id="url-label" class="property-label"><g:message code="url.url.label" default="Url" /></span>
 					
-						<span class="property-value" aria-labelledby="url-label"><g:fieldValue bean="${urlInstance}" field="url"/></span>
+						<a href="${urlInstance.url}"><span class="property-value" aria-labelledby="url-label"><g:fieldValue bean="${urlInstance}" field="url"/></span></a>
 					
 				</li>
 				</g:if>
@@ -42,6 +41,15 @@
 						<span class="property-value" aria-labelledby="shortUrlName-label"><g:fieldValue bean="${urlInstance}" field="shortUrlName"/></span>
 					
 				</li>
+				</g:if>
+
+				<g:if test="${urlInstance?.clicksCount}">
+					<li class="fieldcontain">
+						<span id="clicksCount-label" class="property-label"><g:message code="url.clicksCount.label" default="Click Count" /></span>
+
+						<span class="property-value" aria-labelledby="clicksCount-label"><g:fieldValue bean="${urlInstance}" field="clicksCount"/></span>
+
+					</li>
 				</g:if>
 			
 				<g:if test="${urlInstance?.dateCreated}">
